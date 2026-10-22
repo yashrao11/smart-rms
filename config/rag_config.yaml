@@ -1,0 +1,35 @@
+# RAG Engine Configuration
+# DO NOT hardcode this threshold in source code — always read from here.
+
+rag:
+  # Initial hypothesis from project spec — MUST be calibrated against a labelled evaluation set.
+  # See docs/modules/03_rag_engine.md for calibration instructions.
+  confidence_threshold: 0.82
+
+  # Number of chunks to retrieve per query
+  top_k: 5
+
+  # Maximum tokens in the LLM-generated answer
+  max_answer_tokens: 300
+
+  # Embedding model — changing this requires re-embedding ALL documents
+  embedding_model: "BAAI/bge-small-en-v1.5"
+
+  # Qdrant collections to search (order does not matter — all are searched in parallel)
+  collections:
+    - knowledge_circulars
+    - knowledge_policies
+    - knowledge_faqs
+    - knowledge_academic_calendar
+    - knowledge_syllabi
+    - knowledge_placement
+    - knowledge_hostel
+    - knowledge_general
+
+  # LLM configuration
+  llm:
+    provider: "ollama"               # ollama | openai | gemini — swap without changing pipeline
+    model: "llama3.2:3b"
+    base_url: "http://localhost:11434"
+    max_context_tokens: 4096
+    temperature: 0.1                 # Low temperature for factual, deterministic answers

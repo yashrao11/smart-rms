@@ -1,0 +1,11 @@
+# Document Index — Header Row Only
+
+# Instructions:
+# - This file is maintained by src/ttl_manager/metadata_writer.py
+# - Do NOT edit manually except to add/correct notes
+# - All dates in ISO 8601 format (YYYY-MM-DD)
+# - Use empty cell (not "NULL") for unknown values
+# - sha256 must be 64-character hex string
+# - status must be one of: pending_review | approved | active | expired | superseded | rejected
+
+document_id,filename,drive_file_id,drive_url,title,category,source_url,publication_date,valid_from,valid_until,status,supersedes_document_id,downloaded_at,uploaded_at,sha256,content_type,file_size_bytes,embedding_model_version,admin_approved_by,admin_approved_at,extraction_quality,crawl_run_id,verification_notes

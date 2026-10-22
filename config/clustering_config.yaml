@@ -1,0 +1,30 @@
+# Nightly Clustering Configuration
+
+clustering:
+  # DBSCAN parameters — tune after first month of real data using k-distance graph
+  algorithm: "dbscan"
+  eps: 0.25                    # Max distance between core samples (cosine similarity space)
+  min_samples: 3               # Min points to form a dense region (cluster)
+  metric: "cosine"
+
+  # Minimum cluster size to appear on the admin dashboard
+  min_cluster_size_to_report: 5
+
+  # Number of top trends to surface
+  top_trends_count: 5
+
+  # Minimum queries needed before clustering is attempted
+  min_queries_to_cluster: 10
+
+  # Fallback algorithm when DBSCAN produces zero valid clusters
+  fallback_algorithm: "hdbscan"
+  hdbscan_min_cluster_size: 3
+
+  # Number of representative queries to show per cluster on the dashboard
+  representative_queries_per_cluster: 3
+
+  # TF-IDF keywords per cluster
+  top_keywords_per_cluster: 5
+
+  # Schedule (cron format — do not change without updating APScheduler config)
+  schedule_cron: "0 2 * * *"    # 02:00 daily

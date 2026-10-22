@@ -1,0 +1,83 @@
+# UMS Crawler Configuration
+# EDIT ALLOWLISTS CAREFULLY before any crawl session.
+# See docs/crawler/01_ums_document_crawler.md for full design.
+
+crawler:
+  # Must be explicitly set to "download" to download anything.
+  # Default is "discovery" — reports only, no downloads.
+  mode: "discovery"
+
+  start_urls:
+    - "https://ums.lpu.in/"
+
+  allowed_domains:
+    - "ums.lpu.in"
+
+  # Expand ONLY after reviewing the discovery report and getting human approval.
+  allowed_path_prefixes:
+    - "/lpuums/"
+
+  max_depth: 3
+  max_pages: 200
+  max_file_size_mb: 50
+  concurrency: 1                    # Never increase above 1 without explicit authorization
+  polite_delay_seconds: 2.0
+  retry_limit: 3
+  session_path: ".playwright_session/"    # gitignored
+
+  eligible_mime_types:
+    - "application/pdf"
+    - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    - "text/plain"
+    - "text/html"
+
+  eligible_extensions:
+    - ".pdf"
+    - ".docx"
+    - ".xlsx"
+    - ".pptx"
+    - ".txt"
+
+  # URLs matching any of these patterns are NEVER crawled.
+  # Do not remove these without explicit authorization review.
+  excluded_url_patterns:
+    - "/payment"
+    - "/fee"
+    - "/submit"
+    - "/profile"
+    - "/edit"
+    - "/delete"
+    - "/logout"
+    - "/api/"
+    - "/grade"
+    - "/attendance"
+    - "/marks"
+    - "/result"
+    - "/personal"
+    - "/message"
+    - "/inbox"
+
+google_drive:
+  target_folder_id: "1o31DA1NLrK1vTFcgUMZ0Qb1y_FXBXM71"
+  credentials_path: ".secrets/gdrive_service_account.json"   # gitignored
+
+document_categories:
+  - circulars
+  - academic_calendar
+  - exam_schedule
+  - placement_notices
+  - faqs
+  - policies
+  - syllabi
+  - hostel_guidelines
+  - uncategorized
+
+# RMS Taxonomy Extractor (separate from document crawler)
+rms_extractor:
+  approved_form_urls:
+    - "https://ums.lpu.in/"    # Update to exact RMS form URL after manual navigation
+  polite_delay_seconds: 1.5
+  dropdown_wait_timeout_ms: 10000
+  session_path: ".playwright_session/rms_session.json"

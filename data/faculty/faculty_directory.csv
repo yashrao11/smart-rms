@@ -1,0 +1,8 @@
+# faculty_name,designation,department,school,building_block,floor,cabin_number,consultation_days,consultation_start,consultation_end,email,employee_id,active,last_verified,notes
+# Instructions:
+#   - consultation_days: pipe-delimited abbreviations (Mon|Wed|Fri)
+#   - active: TRUE or FALSE
+#   - last_verified: YYYY-MM-DD
+#   - All other fields: leave empty if unknown; do NOT invent values
+#   - This file is imported by scripts/seed_faculty_directory.py
+#   - Verify all entries from official LPU sources (department noticeboards, official website)
